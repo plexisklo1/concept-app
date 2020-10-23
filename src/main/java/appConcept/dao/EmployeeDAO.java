@@ -1,6 +1,7 @@
 package appConcept.dao;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -26,8 +27,6 @@ public class EmployeeDAO {
 		query.setParameter("empId", id);
 		Employee emp = query.getSingleResult();
 		session.getTransaction().commit();
-		System.out.println(emp.toString());
-		System.out.println("returning employee from id");
 		return emp;
 	}
 	
@@ -40,9 +39,40 @@ public class EmployeeDAO {
 	}
 	
 	public void removeEmployee(int id) {
-		Session session = sessionFactory.getCurrentSession();
 		Employee emp = getEmployee(id);
+		int teamId = emp.getTeam().getId();
+		System.out.println("checkpoint1");
+		Session session = sessionFactory.getCurrentSession();
 		session.beginTransaction();
+		Query<Team> queryTeam = session.createQuery("FROM Team team WHERE team.id=:teamId",Team.class); 
+		queryTeam.setParameter("teamId", teamId);
+		Team team = queryTeam.getSingleResult();
+		System.out.println("checkpoint2");
+		session.getTransaction().commit();
+		
+		session = sessionFactory.getCurrentSession();
+		session.beginTransaction();
+		Query<Employee> queryEmp = session.createQuery("FROM Employee emp WHERE emp.team=:team", Employee.class);
+		queryEmp.setParameter("team", team);
+		List<Employee> listEmp = queryEmp.getResultList();
+		System.out.println("checkpoint3");
+		session.getTransaction().commit();
+		
+//		for (Iterator iterator=team.getEmployeeList().iterator();iterator.hasNext();) {
+		for (Iterator<Employee> iterator=listEmp.iterator();iterator.hasNext();) {
+			if (iterator.next()==queryTeam) {
+				iterator.remove();
+				System.out.println("good so far");
+				break;
+			}
+			
+		}
+		System.out.println("checkpoint4");
+		
+		session = sessionFactory.getCurrentSession();
+		session.beginTransaction();
+		session.save(team);
+		
 //		Query<Employee> query = session.createQuery("FROM Employee emp WHERE emp.id=:id",Employee.class);
 //		query.setParameter("id", id);
 //		Employee emp = query.getSingleResult();

@@ -84,9 +84,30 @@ public class BasicController {
 	
 	
 	@RequestMapping("empupdate")											//processing edited Employee - update if existing | initialize object & set Team before persisting
-	public String empupdate(@RequestParam("teamid") int teamId, @RequestParam("detailid") int detailId, @ModelAttribute("employee") Employee employee, Model model) {
+	public String empupdate(@RequestParam("teamid") int teamId, @RequestParam("detailid") int detailId, @Valid @ModelAttribute("employee") Employee employee, BindingResult br, Model model) {
 		System.out.println(teamId+" empupdate saving update employee / team id");
 		System.out.println(detailId+" empupdate detailId");
+		if (br.hasErrors()) {
+			if (employee.getId()==0) {										//new employee
+				Employee newEmployee = new Employee();
+				employee.setId(0);
+				model.addAttribute("employee", newEmployee);
+				model.addAttribute("detailid", 0);
+				model.addAttribute("teams", basicService.getTeams());
+				return "empedit";
+			}
+			else {
+				Employee newEmployee = basicService.getEmployee(employee.getId());
+				model.addAttribute("employee", newEmployee);
+				model.addAttribute("detailid", detailId);
+				model.addAttribute("id", String.valueOf(newEmployee.getTeam().getId()));
+				List<Team> teams = basicService.getTeams();
+				model.addAttribute("teams", teams);
+				return "empedit";
+			}
+			
+		}
+		
 		if (detailId==0) {													//if no Detail assigned to Employee - persist Employee and move to definition of new Detail
 			employee.setTeam(basicService.getTeam(teamId));
 			int empId=basicService.saveEmployee(employee);

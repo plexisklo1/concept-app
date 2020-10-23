@@ -122,7 +122,6 @@
 		</dependency>
 	</dependencies>
 
-
 	<build>
 		<finalName>WebAppConcept</finalName>
 	</build>

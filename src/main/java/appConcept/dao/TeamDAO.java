@@ -14,16 +14,6 @@ public class TeamDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-//	public Team getTeam(Employee emp) {
-//		Session session = sessionFactory.getCurrentSession();
-//		session.beginTransaction();
-//		Query<Team> query = session.createQuery("FROM Team team WHERE team.employee=:emp", Team.class);
-//		query.setParameter("emp", emp);
-//		Team team = query.getSingleResult();
-//		session.getTransaction().commit();
-//		return team;
-//	}
-
 	public Team getTeam(int id) {
 		Session session = sessionFactory.getCurrentSession();
 		session.beginTransaction();

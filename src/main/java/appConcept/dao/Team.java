@@ -37,7 +37,7 @@ public class Team {
 	@Column(name="description")
 	private String description;
 	
-	@OneToMany(mappedBy="team", fetch=FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})	
+	@OneToMany(mappedBy="team", cascade = {CascadeType.DETACH,CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH})	
 	private List<Employee> employeeList=new ArrayList<>();;
 
 	public Team() {}

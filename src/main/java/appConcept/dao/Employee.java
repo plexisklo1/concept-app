@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="employees")
@@ -21,10 +23,13 @@ public class Employee {
 	@Column(name="id")
 	private int id;
 	
-	
+	@Size(min=1, max=20, message="Must be of length between 1 and 20")
+	@Pattern(regexp = "[a-zA-Z0-9-]+", message="Can only use letters, numbers and dashes.")
 	@Column(name="first_name")
 	private String firstName;
 	
+	@Size(min=1, max=20, message="Must be of length between 1 and 20")
+	@Pattern(regexp = "[a-zA-Z0-9-]+", message="Can only use letters, numbers and dashes.")
 	@Column(name="last_name")
 	private String lastName;
 	
@@ -32,7 +37,7 @@ public class Employee {
 	@JoinColumn(name="team_id")
 	private Team team;
 	
-	@OneToOne(mappedBy="employee", fetch=FetchType.LAZY)
+	@OneToOne(mappedBy="employee", fetch=FetchType.EAGER)
 	private Detail detail;
 
 	

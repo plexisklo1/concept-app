@@ -5,7 +5,6 @@
 <head>
 <title>Employee/Team list</title>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-<!--  <link rel="stylesheet" type="text/css" href="css/default.css" /> -->
 </head>
 <body>
 
@@ -18,7 +17,7 @@
 				<th>First name</th>
 				<th>Last name</th>
 				<th>Team</th>
-				<th></th>
+				<th>Action</th>
 			</tr>
 		</thead>
 		

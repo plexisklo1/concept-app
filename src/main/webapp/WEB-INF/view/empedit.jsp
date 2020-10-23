@@ -10,7 +10,7 @@
 <body>
 	<br>
 	<div class="container text-center mx-auto">
-		<h3>${employee.firstName}${employee.lastName}</h3>
+		<h3>${employee.firstName} ${employee.lastName}</h3>
 		<hr>
 
 		<table class="table">
@@ -34,6 +34,10 @@
 							</c:forEach>
 					</select></td>
 					<td><input type="submit" value="Send" class="btn btn-dark" />
+				</tr>
+				<tr>
+					<td><form:errors path="firstName"/></td>
+					<td><form:errors path="lastName"/></td>
 				</tr>
 				<form:hidden path="id" value="${employee.id}" />
 
