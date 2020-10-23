@@ -14,6 +14,7 @@ public class TeamDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	//get Team from DB via id/DB PK
 	public Team getTeam(int id) {
 		Session session = sessionFactory.getCurrentSession();
 		session.beginTransaction();
@@ -24,6 +25,7 @@ public class TeamDAO {
 		return team;
 	}
 	
+	//get all Team records from DB
 	public List<Team> getTeams() {
 		Session session = sessionFactory.getCurrentSession();
 		session.beginTransaction();
@@ -33,6 +35,7 @@ public class TeamDAO {
 		return list;
 	}
 
+	//persist Team
 	public Team saveTeam(Team team) {
 		Session session = sessionFactory.getCurrentSession();
 		session.beginTransaction();
@@ -41,6 +44,7 @@ public class TeamDAO {
 		return team;
 	}
 
+	//remove Team
 	public void removeTeam(int id) {
 		Session session = sessionFactory.getCurrentSession();
 		session.beginTransaction();

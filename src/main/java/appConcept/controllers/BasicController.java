@@ -36,11 +36,9 @@ public class BasicController {
 
 	@GetMapping("/empdetail")												//load Detail for Employee
 	public String details(@RequestParam("empid") int id, Model model) {
-		System.out.println("get employee "+id);
 		Employee emp = basicService.getEmployee(id);
 		model.addAttribute("employee", emp);
 		Detail detail = basicService.getDetails(emp.getDetail().getId());
-		System.out.println(detail.toString());
 		model.addAttribute("detail", detail);
 		return "empdetail";
 	}
@@ -85,8 +83,6 @@ public class BasicController {
 	
 	@RequestMapping("empupdate")											//processing edited Employee - update if existing | initialize object & set Team before persisting
 	public String empupdate(@RequestParam("teamid") int teamId, @RequestParam("detailid") int detailId, @Valid @ModelAttribute("employee") Employee employee, BindingResult br, Model model) {
-		System.out.println(teamId+" empupdate saving update employee / team id");
-		System.out.println(detailId+" empupdate detailId");
 		if (br.hasErrors()) {
 			if (employee.getId()==0) {										//new employee
 				Employee newEmployee = new Employee();
@@ -122,7 +118,6 @@ public class BasicController {
 		}
 		employee.setDetail(basicService.getDetails(detailId));
 		employee.setTeam(basicService.getTeam(teamId));
-		System.out.println(employee.toString());
 		basicService.saveEmployee(employee);
 		return "redirect:/";
 	}

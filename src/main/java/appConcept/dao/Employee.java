@@ -41,9 +41,7 @@ public class Employee {
 	private Detail detail;
 
 	
-	public Employee() {
-		System.out.println("employee object created");
-	}
+	public Employee() {}
 
 	public Employee(int id, String firstName, String lastName, Team team, Detail detail) {
 		this.id = id;
@@ -97,9 +95,6 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		System.out.println(firstName);
-		System.out.println(lastName);
-		System.out.println(team.getName());
 		return id+" "+firstName+" "+lastName;
 	}
 	

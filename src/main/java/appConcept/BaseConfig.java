@@ -64,8 +64,6 @@ public class BaseConfig implements WebMvcConfigurer {
 				.addAnnotatedClass(Employee.class)
 				.addAnnotatedClass(Team.class)
 				.buildSessionFactory();
-		System.out.println("sessionfactory initialized");
-		System.out.println(sessionFactory.toString());
 		return sessionFactory;
 	}
 

@@ -12,6 +12,7 @@ public class DetailDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
+	//get Detail from DB via Employee object
 	public Detail getDetails(Employee emp) {
 		Session session = sessionFactory.getCurrentSession();
 		session.beginTransaction();
@@ -22,18 +23,18 @@ public class DetailDAO {
 		return detail;
 	}
 	
+	//get Detail from DB via id/DB PK
 	public Detail getDetails(int id) {
 		Session session = sessionFactory.getCurrentSession();
 		session.beginTransaction();
-		System.out.println("detailDoa - detail id when pulling from db: "+id);
 		Query<Detail> query = session.createQuery("FROM Detail det WHERE det.id=:id", Detail.class);
 		query.setParameter("id", id);
 		Detail detail = query.getSingleResult();
 		session.getTransaction().commit();
-		System.out.println(detail.toString());
 		return detail;
 	}
 	
+	//persist Detail object
 	public int saveDetails(Detail detail) {
 		Session session = sessionFactory.getCurrentSession();
 		session.beginTransaction();
@@ -42,8 +43,9 @@ public class DetailDAO {
 		return detail.getId();
 	}
 	
+	
+	//remove Detail object via id/DB PK
 	public void removeDetails(int id) {
-		
 		Session session = sessionFactory.getCurrentSession();
 		session.beginTransaction();
 		Query<Detail> query = session.createQuery("FROM Detail det WHERE det.id=:iddet",Detail.class);

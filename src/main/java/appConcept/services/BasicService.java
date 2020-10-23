@@ -27,10 +27,9 @@ public class BasicService {
 	@Autowired
 	private TeamDAO teamDao;
 	
-	public BasicService() {
-		System.out.println("BasicService created");
-	}
+	public BasicService() {}
 
+	
 	// EMPLOYEE DB access methods
 	//
 	public Employee getEmployee(int id) {
@@ -49,10 +48,7 @@ public class BasicService {
 		return employeeDao.getEmployees();
 	}
 	
-	public List<Employee> getEmpTeam(Team team) {
-		return employeeDao.getEmpTeam(team);
-	}
-	
+
 	
 	// DETAIL DB access methods
 	//
